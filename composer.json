@@ -1,0 +1,24 @@
+{
+    "name": "jjeaton/wp-find-shared-terms",
+    "description": "Find shared terms in your WP install that may be split in WordPress 4.2+",
+    "minimum-stability": "stable",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "wordpress",
+        "wpcli"
+    ],
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Josh Eaton",
+            "email": "josh@josheaton.org"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2"
+    }
+}
