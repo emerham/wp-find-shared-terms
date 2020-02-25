@@ -53,7 +53,7 @@ class Shared_Terms_CLI_Command extends WP_CLI_Command {
 
 		$terms = wpfst_get_shared_terms();
 		if ( empty( $terms ) ) {
-			wpfst_print_line( "There are no terms to split!", 'error', 'cli' );
+			wpfst_print_line( 'There are no terms to split!', 'error', 'cli' );
 		}
 
 		wpfst_split_shared_terms( $terms, 'cli', $dry_run, $verbose );
