@@ -95,7 +95,7 @@ function wpfst_show_terms_page() {
 function wpfst_show_terms_page_table( $count_of_shared_terms ) {
 	?>
 	<p>
-		<?php printf( wp_kses( _n( 'There is <strong>%d</strong> shared term in your database.', 'There are <strong>%d</strong> shared terms in your database.', $count_of_shared_terms, 'wp-find-shared-terms' ), wp_kses_allowed_html() ), esc_html( $count_of_shared_terms ) ); ?>
+		<?php printf( wp_kses( _n( 'There is <strong>%d</strong> shared term in your database.', 'There are <strong>%d</strong> shared terms in your database.', $count_of_shared_terms, 'wp-find-shared-terms' ), array( 'strong' => array() ) ), esc_html( $count_of_shared_terms ) ); ?>
 		<?php printf( wp_kses( _x( 'If you are running any plugins or themes that store term IDs, you may be affected by <a href="%s">shared term splitting</a> in WordPress 4.2+.', '%s=URL of according post on make.wordpress.org', 'wp-find-shared-terms' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://make.wordpress.org/core/2015/02/16/taxonomy-term-splitting-in-4-2-a-developer-guide/' ) ); ?>
 	</p>
 	<table class="widefat">
