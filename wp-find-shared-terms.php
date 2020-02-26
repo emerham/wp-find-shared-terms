@@ -95,8 +95,8 @@ function wpfst_show_terms_page() {
 function wpfst_show_terms_page_table( $count_of_shared_terms ) {
 	?>
 	<p>
-		<?php printf( esc_html( _n( 'There is <strong>%d</strong> shared term in your database.', 'There are <strong>%d</strong> shared terms in your database.', $count_of_shared_terms, 'wp-find-shared-terms' ) ), esc_attr( $count_of_shared_terms ) ); ?>
-		<?php printf( esc_html_x( 'If you are running any plugins or themes that store term IDs, you may be affected by <a href="%s">shared term splitting</a> in WordPress 4.2+.', '%s=URL of according post on make.wordpress.org', 'wp-find-shared-terms' ), 'https://make.wordpress.org/core/2015/02/16/taxonomy-term-splitting-in-4-2-a-developer-guide/' ); ?>
+		<?php printf( wp_kses( _n( 'There is <strong>%d</strong> shared term in your database.', 'There are <strong>%d</strong> shared terms in your database.', $count_of_shared_terms, 'wp-find-shared-terms' ), wp_kses_allowed_html() ), esc_html( $count_of_shared_terms ) ); ?>
+		<?php printf( wp_kses( _x( 'If you are running any plugins or themes that store term IDs, you may be affected by <a href="%s">shared term splitting</a> in WordPress 4.2+.', '%s=URL of according post on make.wordpress.org', 'wp-find-shared-terms' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://make.wordpress.org/core/2015/02/16/taxonomy-term-splitting-in-4-2-a-developer-guide/' ) ); ?>
 	</p>
 	<table class="widefat">
 		<thead>
@@ -147,7 +147,7 @@ function wpfst_show_terms_page_table( $count_of_shared_terms ) {
 	<?php if ( function_exists( '_split_shared_term' ) ) { ?>
 		<form method="post">
 			<p
-				class="description"><?php esc_html_e( "If you'd like to split your shared terms all at once, instead of waiting for them to be split when a term is updated, you can do so by clicking the button below. <strong>Only do this if you know what this means and you have already updated your code accordingly</strong>, otherwise leave it alone.", 'wp-find-shared-terms' ); ?></p>
+				class="description"><?php printf( wp_kses( __( "If you'd like to split your shared terms all at once, instead of waiting for them to be split when a term is updated, you can do so by clicking the button below. <strong>Only do this if you know what this means and you have already updated your code accordingly</strong>, otherwise leave it alone.", 'wp-find-shared-terms' ), array( 'strong' => array() ) ) ); ?></p>
 			<p><input type="submit" class="button secondary" name="wpfst_submit"
 					  value="<?php esc_attr_e( 'Split Shared Terms', 'wp-find-shared-terms' ); ?>"></p>
 			<p><label for="wpfst-dry-run"><input type="checkbox" name="wpfst_dry_run" id="wpfst-dry-run" value="1"> Dry
@@ -155,7 +155,7 @@ function wpfst_show_terms_page_table( $count_of_shared_terms ) {
 			<p><label for="wpfst-verbose"><input type="checkbox" name="wpfst_verbose" id="wpfst-verbose" value="1">
 					Verbose</label></p>
 			<?php wp_nonce_field( 'wpfst-split-terms', 'wpfst_nonce' ); ?>
-			<p><?php esc_html_e( 'There are also WP-CLI commands: <code>wp shared-terms list</code> and <code>wp shared-terms split</code>. Use these if you have a very large number of shared terms.', 'wp-find-shared-terms' ); ?></p>
+			<p><?php printf( wp_kses( __( 'There are also WP-CLI commands: <code>wp shared-terms list</code> and <code>wp shared-terms split</code>. Use these if you have a very large number of shared terms.', 'wp-find-shared-terms' ), array( 'code' => array() ) ) ); ?></p>
 		</form>
 		<?php
 	}
