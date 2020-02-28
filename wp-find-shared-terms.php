@@ -1,13 +1,13 @@
 <?php
 /**
- * @since             0.1.3
+ * @since             0.1.4
  * @package           WPFindSharedTerms
  *
  * @wordpress-plugin
  * Plugin Name: Find Shared Terms
  * Plugin URI: http://www.josheaton.org/
  * Description: Find shared terms in your WP install that may be split in WordPress 4.2+
- * Version: 0.1.3
+ * Version: 0.1.4
  * Author: Josh Eaton
  * Author URI: http://www.josheaton.org/
  * License: GPL-2.0+
@@ -204,6 +204,10 @@ function wpfst_get_shared_terms( $force = false ) {
  * @since 0.1.2
  */
 function wpfst_split_shared_terms( $terms, $context = 'admin', $dry_run = false, $verbose = true ) {
+	$processed = 0;
+	$split     = 0;
+	$skipped   = 0;
+	$errors    = 0;
 	if ( 'admin' === $context ) {
 		$indent = $verbose ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : '';
 	} else {
@@ -219,7 +223,6 @@ function wpfst_split_shared_terms( $terms, $context = 'admin', $dry_run = false,
 		wpfst_print_line( 'WordPress must be version 4.2 or higher to split terms', 'error', $context );
 	}
 
-	$processed = $split = $skipped = $errors = 0;
 	foreach ( $terms as $term ) {
 		$processed ++;
 		if ( $verbose ) {
@@ -228,7 +231,7 @@ function wpfst_split_shared_terms( $terms, $context = 'admin', $dry_run = false,
 		if ( $dry_run ) {
 			wpfst_print_line( $indent . "_split_shared_term( {$term->term_id}, {$term->term_taxonomy_id} );", 'line', $context );
 		} else {
-			$new_term_id = _split_shared_term( $term->term_id, $term->term_taxonomy_id );
+			$new_term_id = _split_shared_term( absint( $term->term_id ), absint( $term->term_taxonomy_id ) );
 			if ( ! is_wp_error( $new_term_id ) ) {
 				if ( $new_term_id === $term->term_id ) {
 					$skipped ++;
